@@ -26,10 +26,9 @@ namespace Kodanalys
                     Console.Write("Ange namn: ");
                     string name = Console.ReadLine();
 
-                    if (userCount < 10)
+                    if (users.Count < 10)
                     {
                         users.Add(name);
-                        userCount++;
                     }
                     else
                     {
@@ -39,52 +38,33 @@ namespace Kodanalys
                 else if (choice == "2")
                 {
                     Console.WriteLine("Användare:");
-                    for (int i = 0; i < userCount; i++)
+                    foreach (var user in users)
                     {
-                        Console.WriteLine(users[i]);
+                        Console.WriteLine(user);
                     }
                 }
                 else if (choice == "3")
                 {
                     Console.Write("Ange namn att ta bort: ");
                     string nameToRemove = Console.ReadLine();
-                    int indexToRemove = -1;
-                    for (int i = 0; i < userCount; i++)
-                    {
-                        if (users[i] == nameToRemove)
-                        {
-                            indexToRemove = i;
-                            break;
-                        }
-                    }
 
-                    if (indexToRemove != -1)
+                    if (users.Remove(nameToRemove))
                     {
-                        for (int i = indexToRemove; i < userCount - 1; i++)
-                        {
-                            users[i] = users[i + 1];
-                        }
-                        userCount--;
+                        Console.WriteLine("Användare borttagen.");
                     }
                     else
                     {
                         Console.WriteLine("Användaren hittades inte.");
                     }
                 }
+                
+                  
                 else if (choice == "4")
                 {
                     Console.Write("Ange namn att söka: ");
                     string query = Console.ReadLine();
-                    bool found = false;
-                    for (int i = 0; i < userCount; i++)
-                    {
-                        if (users[i] == query)
-                        {
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (found)
+
+                    if (users.Contains(query))
                     {
                         Console.WriteLine("Användaren finns i listan.");
                     }
@@ -92,6 +72,7 @@ namespace Kodanalys
                     {
                         Console.WriteLine("Användaren hittades inte.");
                     }
+
                 }
                 else if (choice == "5")
                 {
